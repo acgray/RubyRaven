@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>File: raven.rb</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+	<script type="text/javascript">
+	// <![CDATA[
+
+	function popupCode( url ) {
+		window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+	}
+
+	function toggleCode( id ) {
+		if ( document.getElementById )
+			elem = document.getElementById( id );
+		else if ( document.all )
+			elem = eval( "document.all." + id );
+		else
+			return false;
+
+		elemStyle = elem.style;
+		
+		if ( elemStyle.display != "block" ) {
+			elemStyle.display = "block"
+		} else {
+			elemStyle.display = "none"
+		}
+
+		return true;
+	}
+	
+	// Make codeblocks hidden by default
+	document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+	
+	// ]]>
+	</script>
+
+</head>
+<body>
+
+
+
+	<div id="fileHeader">
+		<h1>raven.rb</h1>
+		<table class="header-table">
+		<tr class="top-aligned-row">
+			<td><strong>Path:</strong></td>
+			<td>raven.rb
+			</td>
+		</tr>
+		<tr class="top-aligned-row">
+			<td><strong>Last Update:</strong></td>
+			<td>Thu May 27 14:15:14 BST 2004</td>
+		</tr>
+		</table>
+	</div>
+  <!-- banner header -->
+
+	<div id="bodyContent">
+
+
+	<div id="contextContent">
+
+		<div id="description">
+			<p>
+Copyright &#169; 2004 Thomas Counsell GPL Licence. No Warranty Implied.
+</p>
+<p>
+Version Alpha4 24 May 2004
+</p>
+<p>
+Please see <a href="../classes/Raven.html">Raven</a> for use instructions.
+You should also have a copy of ravenexample.rb along with this file. This
+gives a basic example of how to use.
+</p>
+<p>
+Uses the standard library that comes with Ruby 1.8, may be backportable to
+Ruby 1.6 but I haven&#8217;t tested it.
+</p>
+<p>
+Needs the host computer to have OpenSSL correctly installed (done by
+default on unix and mac?)
+</p>
+<p>
+Please report any bugs, or make suggestions to Tom Counsell tamc2@cam.ac.uk
+</p>
+
+		</div>
+
+		<div id="requires-list">
+			<h2 class="section-bar">Required files</h2>
+
+			<div class="name-list">
+			cgi&nbsp;&nbsp;
+			cgi/session&nbsp;&nbsp;
+			base64&nbsp;&nbsp;
+			openssl&nbsp;&nbsp;
+			yaml&nbsp;&nbsp;
+			</div>
+		</div>
+
+
+
+
+
+			
+		<div id="class-list">
+			<h2 class="section-bar">Classes and Modules</h2>
+
+			Class <a href="../classes/CGI.html" class="link">CGI</a><br />
+Class <a href="../classes/Raven.html" class="link">Raven</a><br />
+
+		</div>
+
+	</div>
+
+
+
+		<!-- if includes -->
+
+
+		<!-- if method_list -->
+
+
+	</div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

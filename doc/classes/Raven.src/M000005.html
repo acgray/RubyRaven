@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "DTD/xhtml1-transitional.dtd">
+
+<!--
+
+    authenticate (Raven)
+
+  -->
+<html>
+<head>
+	<title>authenticate (Raven)</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel="stylesheet" href="http://www.FaerieMUD.org/stylesheets/rdoc.css" type="text/css" />
+</head>
+<body>
+	<pre><span class="ruby-comment cmt"># File raven.rb, line 144</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">authenticate</span>( <span class="ruby-identifier">cgi</span>, <span class="ruby-identifier">message</span> = <span class="ruby-ivar">@message</span>, <span class="ruby-identifier">iact</span> = <span class="ruby-ivar">@iact</span> )
+                <span class="ruby-comment cmt"># If the application hasn't set the url, then we shall guess it. This will fail if it is running on a different port.</span>
+                <span class="ruby-ivar">@return_url</span> <span class="ruby-operator">||=</span> <span class="ruby-node">&quot;http://#{cgi.server_name}#{cgi.script_name}&quot;</span>
+        
+                <span class="ruby-comment cmt"># Open (or start a new) session with the user</span>
+                <span class="ruby-identifier">session</span> = <span class="ruby-constant">CGI</span><span class="ruby-operator">::</span><span class="ruby-constant">Session</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">cgi</span>)
+                
+                <span class="ruby-comment cmt"># Try stages 1 2 and 3 in sequence, returning the first one that is not nil.</span>
+                <span class="ruby-identifier">response</span> = <span class="ruby-identifier">check_session</span>( <span class="ruby-identifier">session</span>, <span class="ruby-identifier">iact</span> ) <span class="ruby-operator">||</span> <span class="ruby-identifier">check_response_from_raven</span>( <span class="ruby-identifier">cgi</span>, <span class="ruby-identifier">session</span>, <span class="ruby-identifier">iact</span> ) <span class="ruby-operator">||</span> <span class="ruby-identifier">send_request_to_raven</span>( <span class="ruby-identifier">cgi</span>, <span class="ruby-identifier">session</span>, <span class="ruby-identifier">message</span>, <span class="ruby-identifier">iact</span> )
+                
+                <span class="ruby-comment cmt"># Close the session </span>
+                <span class="ruby-identifier">session</span>.<span class="ruby-identifier">close</span>
+
+                <span class="ruby-comment cmt"># Return the response</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "DTD/xhtml1-transitional.dtd">
+
+<!--
+
+    timeforRFC3339 (CGI)
+
+  -->
+<html>
+<head>
+	<title>timeforRFC3339 (CGI)</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel="stylesheet" href="http://www.FaerieMUD.org/stylesheets/rdoc.css" type="text/css" />
+</head>
+<body>
+	<pre><span class="ruby-comment cmt"># File raven.rb, line 37</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">timeforRFC3339</span>( <span class="ruby-identifier">rfc3339</span> )
+                <span class="ruby-identifier">year</span> = <span class="ruby-identifier">rfc3339</span>[ <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">3</span> ].<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">month</span> = <span class="ruby-identifier">rfc3339</span>[ <span class="ruby-value">4</span><span class="ruby-operator">..</span><span class="ruby-value">5</span> ].<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">day</span> = <span class="ruby-identifier">rfc3339</span>[ <span class="ruby-value">6</span><span class="ruby-operator">..</span><span class="ruby-value">7</span> ].<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">hour</span> = <span class="ruby-identifier">rfc3339</span>[ <span class="ruby-value">9</span><span class="ruby-operator">..</span><span class="ruby-value">10</span> ].<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">minute</span> = <span class="ruby-identifier">rfc3339</span>[ <span class="ruby-value">11</span><span class="ruby-operator">..</span><span class="ruby-value">12</span> ].<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">second</span> = <span class="ruby-identifier">rfc3339</span>[ <span class="ruby-value">13</span><span class="ruby-operator">..</span><span class="ruby-value">14</span> ].<span class="ruby-identifier">to_i</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">gm</span>( <span class="ruby-identifier">year</span>, <span class="ruby-identifier">month</span>, <span class="ruby-identifier">day</span>, <span class="ruby-identifier">hour</span>, <span class="ruby-identifier">minute</span>, <span class="ruby-identifier">second</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

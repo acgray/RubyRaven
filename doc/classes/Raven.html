@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>Class: Raven</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+	<script type="text/javascript">
+	// <![CDATA[
+
+	function popupCode( url ) {
+		window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+	}
+
+	function toggleCode( id ) {
+		if ( document.getElementById )
+			elem = document.getElementById( id );
+		else if ( document.all )
+			elem = eval( "document.all." + id );
+		else
+			return false;
+
+		elemStyle = elem.style;
+		
+		if ( elemStyle.display != "block" ) {
+			elemStyle.display = "block"
+		} else {
+			elemStyle.display = "none"
+		}
+
+		return true;
+	}
+	
+	// Make codeblocks hidden by default
+	document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+	
+	// ]]>
+	</script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <h1>Raven <sup class="type-note">(Class)</sup></h1>
+        <table class="header-table">
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/raven_rb.html">
+                raven.rb
+                </a>
+				<br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+	<div id="bodyContent">
+
+
+	<div id="contextContent">
+
+		<div id="description">
+			<p>
+This is the class that does the business. To use in your ruby cgi script:
+</p>
+<pre>
+      Require 'raven'
+</pre>
+<p>
+Create a <a href="Raven.html">Raven</a> object
+</p>
+<pre>
+      raven = Raven.new
+</pre>
+<p>
+Give <a href="Raven.html">Raven</a> some information about your script.
+Defaults are used if not specified.
+</p>
+<pre>
+      raven.return_url = &quot;http://myhost.com/mycgi/myscript.rb
+      raven.description = &quot;My Amazing Application&quot;
+      raven.message = &quot;I need to know it is really you&quot;
+</pre>
+<p>
+Make sure you have defined a <a href="CGI.html">CGI</a> object
+</p>
+<pre>
+      cgi = CGI.new( 'html4' )
+</pre>
+<p>
+Try and authenticate the user
+</p>
+<pre>
+      authentication = raven.authenticate( cgi )
+</pre>
+<p>
+What we do next depends on the response:
+</p>
+<pre>
+      case authentication
+      when String # Authentication has succeeded
+              user_name = authentication
+      when Integer # Authentication has returned an error
+              error_code = authentication
+      when nil # Authentication wishes to redirect to Raven
+              # DO NOTHING !
+      end
+</pre>
+<p>
+Once the person has been authenticated succesfully this will be recorded in
+a cookie, to eliminate future requests. To delete the cookie:
+</p>
+<pre>
+      raven.de_authenticate( cgi )
+</pre>
+<p>
+If you want to insist that <a href="Raven.html">Raven</a> interact with the
+user, either
+</p>
+<pre>
+      raven.iact = 'yes'
+</pre>
+<p>
+for it to occur on all authentications, or
+</p>
+<pre>
+      raven.authenticate( cgi, &quot;message explaining interaction&quot;, 'yes' )
+</pre>
+<p>
+to make them interact just this once.
+</p>
+
+		</div>
+
+
+		<div id="method-list">
+			<h2 class="section-bar">Methods</h2>
+
+			<div class="name-list">
+			<a href="#M000005">authenticate</a>&nbsp;&nbsp;
+			<a href="#M000004">de_authenticate</a>&nbsp;&nbsp;
+			<a href="#M000003">new</a>&nbsp;&nbsp;
+			</div>
+		</div>
+
+		<div id="constants-list">
+			<h2 class="section-bar">Constants</h2>
+
+			<div class="name-list">
+				<table summary="Constants">
+				<tr class="top-aligned-row context-row">
+					<td class="context-item-name">DEFAULT_PUBLIC_KEY_FILE</td>
+					<td>=</td>
+					<td class="context-item-value">'pubkey1.txt'</td>
+				</tr>
+				<tr class="top-aligned-row context-row">
+					<td>&nbsp;</td>
+					<td colspan="2" class="context-item-desc">
+The default location to look for the public key used by the <a
+href="Raven.html">Raven</a> service. Assumes this is a text file with an
+RSA public key.
+
+</td>
+				</tr>
+				<tr class="top-aligned-row context-row">
+					<td class="context-item-name">DEFAULT_PUBLIC_KEY_ID</td>
+					<td>=</td>
+					<td class="context-item-value">'1'</td>
+				</tr>
+				<tr class="top-aligned-row context-row">
+					<td>&nbsp;</td>
+					<td colspan="2" class="context-item-desc">
+The default <a href="Raven.html">Raven</a> Key Id.
+
+</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+
+
+
+		<div id="attribute-list">
+			<h2 class="section-bar">Attributes</h2>
+
+			<div class="name-list">
+				<table>
+				<tr class="top-aligned-row context-row">
+					<td class="context-item-name">aauth</td>
+					<td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+					<td class="context-item-desc">
+An array of strings of the accepted authentication types. Defaults to
+nothing, which means anything that <a href="Raven.html">Raven</a> finds
+acceptable
+
+</td>
+				</tr>
+				<tr class="top-aligned-row context-row">
+					<td class="context-item-name">description</td>
+					<td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+					<td class="context-item-desc">
+A description of this website provided by <a href="Raven.html">Raven</a> to
+the user
+
+</td>
+				</tr>
+				<tr class="top-aligned-row context-row">
+					<td class="context-item-name">fail</td>
+					<td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+					<td class="context-item-desc">
+If &#8216;Yes&#8217; then <a href="Raven.html">Raven</a> will not return a
+response to this script unless it has a successfull authentication. Note
+that this script may still return an error code if the time skew is out,
+the signature is invalid, or the response didn&#8217;t match a request.
+Defaults to &#8217;&#8217; (ie No)
+
+</td>
+				</tr>
+				<tr class="top-aligned-row context-row">
+					<td class="context-item-name">iact</td>
+					<td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+					<td class="context-item-desc">
+A string containing &#8216;yes&#8217; or if we wish to insist that
+authentication takes place. Defaults to blank.
+
+</td>
+				</tr>
+				<tr class="top-aligned-row context-row">
+					<td class="context-item-name">match_response_and_request</td>
+					<td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+					<td class="context-item-desc">
+A boolean as to whether we wish to insist that all <a
+href="Raven.html">Raven</a> responses to us be triggered by a request by
+this script. If you don&#8217;t set the return_url explicitly, then this
+should be true to avoid a security hole. Default is true.
+
+</td>
+				</tr>
+				<tr class="top-aligned-row context-row">
+					<td class="context-item-name">max_skew</td>
+					<td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+					<td class="context-item-desc">
+The maximum difference permitted between the clocks on this server and <a
+href="Raven.html">Raven</a> (plus message transmission time) in seconds
+
+</td>
+				</tr>
+				<tr class="top-aligned-row context-row">
+					<td class="context-item-name">message</td>
+					<td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+					<td class="context-item-desc">
+A message as to why authentication is required probided by <a
+href="Raven.html">Raven</a> to the user
+
+</td>
+				</tr>
+				<tr class="top-aligned-row context-row">
+					<td class="context-item-name">publickey</td>
+					<td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+					<td class="context-item-desc">
+The public keys used by the <a href="Raven.html">Raven</a> service to sign
+its messages. Must be a Hash where Keys are valid <a
+href="Raven.html">Raven</a> Key Ids and the values are objects that duck
+type to a method like OpenSSL::PKey.verify
+
+</td>
+				</tr>
+				<tr class="top-aligned-row context-row">
+					<td class="context-item-name">raven_url</td>
+					<td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+					<td class="context-item-desc">
+The url of the raven service. Defaults to
+https://raven.cam.ac.uk/auth/authenticate.html
+
+</td>
+				</tr>
+				<tr class="top-aligned-row context-row">
+					<td class="context-item-name">raven_version</td>
+					<td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+					<td class="context-item-desc">
+The version of the raven protocol being used. Defaults to 1
+
+</td>
+				</tr>
+				<tr class="top-aligned-row context-row">
+					<td class="context-item-name">return_url</td>
+					<td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+					<td class="context-item-desc">
+The url of this cgi script. Guesed from the calling user&#8217;s http
+headers if not given (which cannot be relied upon)
+
+</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+			
+
+	</div>
+
+
+
+		<!-- if includes -->
+
+
+		<!-- if method_list -->
+		<div id="methods">
+			<h2 class="section-bar">Public Class methods</h2>
+
+			<div id="method-M000003" class="method-detail">
+				<a name="M000003"></a>
+
+				<div class="method-heading">
+					<a href="Raven.src/M000003.html" target="Code" class="method-signature"
+						onclick="popupCode('Raven.src/M000003.html');return false;">
+					<span class="method-name">new</span><span class="method-args">()</span>
+					</a>
+				</div>
+			
+				<div class="method-description">
+				</div>
+			</div>
+
+			<h2 class="section-bar">Public Instance methods</h2>
+
+			<div id="method-M000005" class="method-detail">
+				<a name="M000005"></a>
+
+				<div class="method-heading">
+					<a href="Raven.src/M000005.html" target="Code" class="method-signature"
+						onclick="popupCode('Raven.src/M000005.html');return false;">
+					<span class="method-name">authenticate</span><span class="method-args">( cgi, message = @message, iact = @iact )</span>
+					</a>
+				</div>
+			
+				<div class="method-description">
+					<p>
+This is the call to authenticate.
+</p>
+				</div>
+			</div>
+
+			<div id="method-M000004" class="method-detail">
+				<a name="M000004"></a>
+
+				<div class="method-heading">
+					<a href="Raven.src/M000004.html" target="Code" class="method-signature"
+						onclick="popupCode('Raven.src/M000004.html');return false;">
+					<span class="method-name">de_authenticate</span><span class="method-args">( cgi )</span>
+					</a>
+				</div>
+			
+				<div class="method-description">
+					<p>
+Can call this to log off.
+</p>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

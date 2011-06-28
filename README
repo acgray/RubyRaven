@@ -1,0 +1,53 @@
+Ruby Raven is a ruby (www.ruby-lang.org) implementation of a Application Agent for the Raven authentication protocol (raven.cam.ac.uk).
+
+Copyright: Thomas Counsell 2004.  
+Licence: GPL
+
+There are three files:
+1. raven.rb - Is the library that implements the protocol.  It creates a Raven class and modifies the CGI class to include new redirect and time-stamp conversions.
+2. pubkey1.txt - Is the public key of the raven service.  This may not be up to date.
+3. ravenexample.rb - Is an example of using the Raven Application Agent
+
+To install:
+Ruby Raven REQUIRES ruby 1.8 (so that it can use openssl)
+
+1. Put ravenexample.rb in a place where it can be accessed and executed by your webserver (may need to change its permissions)
+2. (OPTIONAL) Edit ravenexample.rb so that the line specifiying the raven.return_url gives the location of the ravenexample.rb script on your webserver.
+2. Put pubkey1.txt in the same directory
+3. Put raven.rb somewhere in the Ruby search path (can be the same directory as ravenexample.rb)
+
+To use:
+ravenexample.rb shows the usual method.  A call to raven#authenticate( cgi ) will return nil, an error number, or the text identifier of a person who is logged in.
+
+If the response to authenticate is:
+nil: The program should not produce any cgi as it is about to redirect to Raven
+Integer: Then a raven error has occurred. The meaning of the number is in the Raven developer docs.
+String: Then someone has been authenticated.  The string contains their identifier.
+
+Bugs
+Please send any comments or bug reports to tamc2@cam.ac.uk.
+
+Versions:
+beta2
+* Fixed bug identified by Tom Huckstep where did not check that the url supplied by raven matched the url of the system.
+* Put the latest raven key in the package and made it default.
+
+beta1
+* Can now handle multiple keys, should Raven ever wish to return a different kid.
+* Refactored a bit.
+* By default, now inists that all responses from Raven are triggered by a request FROM THIS SCRIPT to hopefully potentially fix a security hole with guessing the return_url
+* Can now insist that an interaction with the user takes place (iact = 'yes')
+* Can now set aauth and fail in the request to Raven, although these are not checked in the response
+* Basic api / documentation
+
+alpha3:
+* Now guesses the return_url based on the hostname and the path to the script calling Raven.  This will be wrong if the script is running on a non-standard port
+* Now remembers all the GET and POST parameters that were in the request before authentication took place
+* Now has a de_authenticate method that causes the user to be forgotten.
+
+alpha2:
+* Added a session variable, so that the agent doesn't re-authenticate with Raven every time.  The length of time this session lasts is specified by Raven.
+
+alpha1:
+* Basic Raven authentication implemented.
+

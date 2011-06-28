@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "DTD/xhtml1-transitional.dtd">
+
+<!--
+
+    new (Raven)
+
+  -->
+<html>
+<head>
+	<title>new (Raven)</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel="stylesheet" href="http://www.FaerieMUD.org/stylesheets/rdoc.css" type="text/css" />
+</head>
+<body>
+	<pre><span class="ruby-comment cmt"># File raven.rb, line 117</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+                <span class="ruby-comment cmt"># Put some default values in for now</span>
+                <span class="ruby-ivar">@raven_url</span> = <span class="ruby-value str">'https://raven.cam.ac.uk/auth/authenticate.html'</span>
+                <span class="ruby-ivar">@raven_version</span> = <span class="ruby-value str">'1'</span>
+                <span class="ruby-ivar">@max_skew</span> = <span class="ruby-value">30</span> <span class="ruby-comment cmt"># seconds</span>
+                <span class="ruby-ivar">@publickey</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-keyword kw">begin</span>
+                        <span class="ruby-ivar">@publickey</span>[ <span class="ruby-constant">DEFAULT_PUBLIC_KEY_ID</span> ] = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">PKey</span><span class="ruby-operator">::</span><span class="ruby-constant">RSA</span>.<span class="ruby-identifier">new</span>( <span class="ruby-constant">IO</span>.<span class="ruby-identifier">readlines</span>( <span class="ruby-constant">DEFAULT_PUBLIC_KEY_FILE</span> ).<span class="ruby-identifier">to_s</span> )
+                <span class="ruby-keyword kw">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+                        <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">err</span>
+                        <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Public Key failed to load from #{DEFAULT_PUBLIC_KEY_FILE}&quot;</span>
+                <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-ivar">@description</span> = <span class="ruby-value str">'There is no description for this website'</span>
+                <span class="ruby-ivar">@message</span> = <span class="ruby-value str">'No reason has been given'</span>
+                <span class="ruby-ivar">@aauth</span> = []
+                <span class="ruby-ivar">@iact</span> = <span class="ruby-value str">&quot;&quot;</span>
+                <span class="ruby-ivar">@match_response_and_request</span> = <span class="ruby-keyword kw">true</span>
+                <span class="ruby-ivar">@fail</span> = <span class="ruby-value str">&quot;&quot;</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
